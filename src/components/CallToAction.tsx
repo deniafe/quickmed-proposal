@@ -66,9 +66,9 @@ export default function CallToAction({
       {/* Footer Note */}
       <div className="text-center text-gray-600 text-sm">
         <p>This proposal is valid for 30 days from the date of issue.</p>
-        <p className="mt-2">
-          © 2024 QuickMed Development Team. All rights reserved.
-        </p>
+        {/* <p className="mt-2">
+          © 2025 QuickMed Development Team. All rights reserved.
+        </p> */}
       </div>
     </>
   );

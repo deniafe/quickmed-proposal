@@ -8,12 +8,12 @@ export default function ExecutiveSummary() {
         Executive Summary
       </h2>
       <p className="text-gray-700 leading-relaxed mb-4">
-        This proposal outlines the development of <strong>QuickMed</strong> - a
-        comprehensive digital healthcare logistics platform connecting patients,
-        verified pharmacies, and delivery riders across Nigeria. Similar to Uber
-        Eats but specialized for medication delivery, this enterprise-grade
-        solution addresses the critical need for reliable, fast, and compliant
-        pharmaceutical distribution.
+        This proposal outlines the development of{" "}
+        <strong>QuickMed Enterprise</strong> - a comprehensive digital
+        healthcare logistics platform connecting patients, verified pharmacies,
+        and delivery riders across Nigeria. This enterprise-grade solution
+        includes advanced AI, predictive analytics, multi-branch support, and
+        regulatory compliance features designed for nationwide scale deployment.
       </p>
       <div className="grid md:grid-cols-3 gap-4 mt-6">
         <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">

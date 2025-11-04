@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Header from "./Header";
 import ExecutiveSummary from "./ExecutiveSummary";
-import PackageSelector from "./PackageSelector";
+import SubscriptionSelector from "./PackageSelector";
 import FeatureBreakdown from "./FeatureBreakdown";
 import CostBreakdown from "./CostBreakdown";
 import PaymentStructure from "./PaymentStructure";
@@ -16,11 +16,18 @@ import TermsConditions from "./TermsConditions";
 import InvestmentComparison from "./InvestmentComparison";
 import ROICalculator from "./ROICalculator";
 import CallToAction from "./CallToAction";
-import { packages, appFeatures, costBreakdown, paymentStructure } from "./data";
+import {
+  packages,
+  subscriptionPlans,
+  appFeatures,
+  costBreakdown,
+  paymentStructure,
+} from "./data";
 
 export default function QuickMedProposal() {
-  const [selectedPackage, setSelectedPackage] = useState("standard");
-  const [activeFeatureTab, setActiveFeatureTab] = useState("user");
+  const [selectedPackage, setSelectedPackage] = useState("enterprise");
+  const [selectedSubscription, setSelectedSubscription] = useState("standard");
+  const [activeFeatureTab, setActiveFeatureTab] = useState("pharmacy");
 
   const currentPackage = packages[selectedPackage as keyof typeof packages];
   const currentBreakdown =
@@ -35,10 +42,10 @@ export default function QuickMedProposal() {
       <div className="max-w-7xl mx-auto px-6 py-12">
         <ExecutiveSummary />
 
-        <PackageSelector
-          packages={packages}
-          selectedPackage={selectedPackage}
-          onPackageSelect={setSelectedPackage}
+        <SubscriptionSelector
+          subscriptionPlans={subscriptionPlans}
+          selectedPlan={selectedSubscription}
+          onPlanSelect={setSelectedSubscription}
         />
 
         <FeatureBreakdown
@@ -67,9 +74,9 @@ export default function QuickMedProposal() {
 
         <TermsConditions currentPackage={currentPackage} />
 
-        <InvestmentComparison />
+        {/* <InvestmentComparison /> */}
 
-        <ROICalculator currentPackage={currentPackage} />
+        {/* <ROICalculator currentPackage={currentPackage} /> */}
 
         <CallToAction
           currentPackage={currentPackage}

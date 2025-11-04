@@ -41,7 +41,7 @@ export default function CallToAction({
   return (
     <>
       {/* Call to Action */}
-      <div className="bg-green-600 text-white rounded-lg shadow-md p-8 text-center mb-8">
+      {/* <div className="bg-green-600 text-white rounded-lg shadow-md p-8 text-center mb-8">
         <h2 className="text-3xl font-bold mb-4">Ready to Launch QuickMed?</h2>
         <p className="text-xl text-green-100 mb-6">
           {`Let's transform healthcare delivery in Nigeria together`}
@@ -61,7 +61,7 @@ export default function CallToAction({
         <p className="text-sm text-green-100 mt-6">
           Contact: deniafe@gmail.com
         </p>
-      </div>
+      </div> */}
 
       {/* Footer Note */}
       <div className="text-center text-gray-600 text-sm">

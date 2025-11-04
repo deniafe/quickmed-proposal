@@ -1,6 +1,6 @@
 export { default as Header } from "./Header";
 export { default as ExecutiveSummary } from "./ExecutiveSummary";
-export { default as PackageSelector } from "./PackageSelector";
+export { default as SubscriptionSelector } from "./PackageSelector";
 export { default as FeatureBreakdown } from "./FeatureBreakdown";
 export { default as CostBreakdown } from "./CostBreakdown";
 export { default as PaymentStructure } from "./PaymentStructure";

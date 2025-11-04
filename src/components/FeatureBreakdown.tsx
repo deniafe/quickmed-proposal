@@ -73,9 +73,11 @@ export default function FeatureBreakdown({
           // Package filter
           const matchesPackage =
             packageFilter === "all" ||
-            (packageFilter === "mvp" && feature.mvp) ||
-            (packageFilter === "standard" && feature.standard) ||
-            (packageFilter === "enterprise" && feature.enterprise);
+            (activeFeatureTab === "pharmacy"
+              ? (packageFilter === "mvp" && feature.mvp) ||
+                (packageFilter === "standard" && feature.standard) ||
+                (packageFilter === "enterprise" && feature.enterprise)
+              : true); // For non-pharmacy apps, all features are included
 
           return matchesSearch && matchesPackage;
         });
@@ -87,7 +89,7 @@ export default function FeatureBreakdown({
         } as ExtendedSection;
       })
       .filter((section) => section.hasVisibleFeatures);
-  }, [currentFeatures.sections, searchTerm, packageFilter]);
+  }, [currentFeatures.sections, searchTerm, packageFilter, activeFeatureTab]);
 
   const renderFeatureTable = (sections: ExtendedSection[]) => {
     return (
@@ -119,22 +121,38 @@ export default function FeatureBreakdown({
                   <div className="flex items-center gap-2">
                     {/* Quick preview of package coverage */}
                     <div className="hidden sm:flex items-center gap-1">
-                      {section.features.some((f: Feature) => f.mvp) && (
-                        <div
-                          className="w-2 h-2 bg-blue-600 rounded-full"
-                          title="MVP features available"
-                        ></div>
+                      {/* Show tier dots only for pharmacy app */}
+                      {activeFeatureTab === "pharmacy" && (
+                        <>
+                          {section.features.some((f: Feature) => f.mvp) && (
+                            <div
+                              className="w-2 h-2 bg-blue-600 rounded-full"
+                              title="MVP features available"
+                            ></div>
+                          )}
+                          {section.features.some(
+                            (f: Feature) => f.standard
+                          ) && (
+                            <div
+                              className="w-2 h-2 bg-green-600 rounded-full"
+                              title="Standard features available"
+                            ></div>
+                          )}
+                          {section.features.some(
+                            (f: Feature) => f.enterprise
+                          ) && (
+                            <div
+                              className="w-2 h-2 bg-purple-600 rounded-full"
+                              title="Enterprise features available"
+                            ></div>
+                          )}
+                        </>
                       )}
-                      {section.features.some((f: Feature) => f.standard) && (
-                        <div
-                          className="w-2 h-2 bg-green-600 rounded-full"
-                          title="Standard features available"
-                        ></div>
-                      )}
-                      {section.features.some((f: Feature) => f.enterprise) && (
+                      {/* For other apps, show single purple dot */}
+                      {activeFeatureTab !== "pharmacy" && (
                         <div
                           className="w-2 h-2 bg-purple-600 rounded-full"
-                          title="Enterprise features available"
+                          title="All features included"
                         ></div>
                       )}
                     </div>
@@ -156,15 +174,26 @@ export default function FeatureBreakdown({
                         <th className="text-left py-3 px-6 font-semibold text-gray-700">
                           Feature
                         </th>
-                        <th className="text-center py-3 px-4 font-semibold text-blue-700 min-w-[100px]">
-                          MVP
-                        </th>
-                        <th className="text-center py-3 px-4 font-semibold text-green-700 min-w-[100px]">
-                          Standard
-                        </th>
-                        <th className="text-center py-3 px-4 font-semibold text-purple-700 min-w-[100px]">
-                          Enterprise
-                        </th>
+                        {/* Only show tier columns for pharmacy app */}
+                        {activeFeatureTab === "pharmacy" && (
+                          <>
+                            <th className="text-center py-3 px-4 font-semibold text-blue-700 min-w-[100px]">
+                              MVP
+                            </th>
+                            <th className="text-center py-3 px-4 font-semibold text-green-700 min-w-[100px]">
+                              Standard
+                            </th>
+                            <th className="text-center py-3 px-4 font-semibold text-purple-700 min-w-[100px]">
+                              Enterprise
+                            </th>
+                          </>
+                        )}
+                        {/* For other apps, show included column */}
+                        {activeFeatureTab !== "pharmacy" && (
+                          <th className="text-center py-3 px-4 font-semibold text-purple-700 min-w-[100px]">
+                            Included
+                          </th>
+                        )}
                       </tr>
                     </thead>
                     <tbody>
@@ -184,27 +213,38 @@ export default function FeatureBreakdown({
                                 </div>
                               </div>
                             </td>
-                            <td className="text-center py-4 px-4">
-                              {feature.mvp ? (
-                                <CheckCircle className="w-5 h-5 text-blue-600 mx-auto" />
-                              ) : (
-                                <AlertCircle className="w-5 h-5 text-gray-300 mx-auto" />
-                              )}
-                            </td>
-                            <td className="text-center py-4 px-4">
-                              {feature.standard ? (
-                                <CheckCircle className="w-5 h-5 text-green-600 mx-auto" />
-                              ) : (
-                                <AlertCircle className="w-5 h-5 text-gray-300 mx-auto" />
-                              )}
-                            </td>
-                            <td className="text-center py-4 px-4">
-                              {feature.enterprise ? (
+                            {/* Show tier columns only for pharmacy app */}
+                            {activeFeatureTab === "pharmacy" && (
+                              <>
+                                <td className="text-center py-4 px-4">
+                                  {feature.mvp ? (
+                                    <CheckCircle className="w-5 h-5 text-blue-600 mx-auto" />
+                                  ) : (
+                                    <AlertCircle className="w-5 h-5 text-gray-300 mx-auto" />
+                                  )}
+                                </td>
+                                <td className="text-center py-4 px-4">
+                                  {feature.standard ? (
+                                    <CheckCircle className="w-5 h-5 text-green-600 mx-auto" />
+                                  ) : (
+                                    <AlertCircle className="w-5 h-5 text-gray-300 mx-auto" />
+                                  )}
+                                </td>
+                                <td className="text-center py-4 px-4">
+                                  {feature.enterprise ? (
+                                    <CheckCircle className="w-5 h-5 text-purple-600 mx-auto" />
+                                  ) : (
+                                    <AlertCircle className="w-5 h-5 text-gray-300 mx-auto" />
+                                  )}
+                                </td>
+                              </>
+                            )}
+                            {/* For other apps, show single included column */}
+                            {activeFeatureTab !== "pharmacy" && (
+                              <td className="text-center py-4 px-4">
                                 <CheckCircle className="w-5 h-5 text-purple-600 mx-auto" />
-                              ) : (
-                                <AlertCircle className="w-5 h-5 text-gray-300 mx-auto" />
-                              )}
-                            </td>
+                              </td>
+                            )}
                           </tr>
                         )
                       )}
@@ -325,22 +365,36 @@ export default function FeatureBreakdown({
             {currentFeatures.title}
           </h3>
           <div className="flex flex-wrap gap-2">
-            <div className="flex items-center gap-1 px-3 py-1 bg-blue-50 rounded-full border border-blue-200">
-              <div className="w-3 h-3 bg-blue-600 rounded-full"></div>
-              <span className="text-xs font-medium text-blue-700">MVP</span>
-            </div>
-            <div className="flex items-center gap-1 px-3 py-1 bg-green-50 rounded-full border border-green-200">
-              <div className="w-3 h-3 bg-green-600 rounded-full"></div>
-              <span className="text-xs font-medium text-green-700">
-                Standard
-              </span>
-            </div>
-            <div className="flex items-center gap-1 px-3 py-1 bg-purple-50 rounded-full border border-purple-200">
-              <div className="w-3 h-3 bg-purple-600 rounded-full"></div>
-              <span className="text-xs font-medium text-purple-700">
-                Enterprise
-              </span>
-            </div>
+            {/* Show tier badges only for pharmacy app */}
+            {activeFeatureTab === "pharmacy" && (
+              <>
+                <div className="flex items-center gap-1 px-3 py-1 bg-blue-50 rounded-full border border-blue-200">
+                  <div className="w-3 h-3 bg-blue-600 rounded-full"></div>
+                  <span className="text-xs font-medium text-blue-700">MVP</span>
+                </div>
+                <div className="flex items-center gap-1 px-3 py-1 bg-green-50 rounded-full border border-green-200">
+                  <div className="w-3 h-3 bg-green-600 rounded-full"></div>
+                  <span className="text-xs font-medium text-green-700">
+                    Standard
+                  </span>
+                </div>
+                <div className="flex items-center gap-1 px-3 py-1 bg-purple-50 rounded-full border border-purple-200">
+                  <div className="w-3 h-3 bg-purple-600 rounded-full"></div>
+                  <span className="text-xs font-medium text-purple-700">
+                    Enterprise
+                  </span>
+                </div>
+              </>
+            )}
+            {/* For other apps, show included badge */}
+            {activeFeatureTab !== "pharmacy" && (
+              <div className="flex items-center gap-1 px-3 py-1 bg-purple-50 rounded-full border border-purple-200">
+                <div className="w-3 h-3 bg-purple-600 rounded-full"></div>
+                <span className="text-xs font-medium text-purple-700">
+                  All Features Included
+                </span>
+              </div>
+            )}
           </div>
         </div>
       </div>

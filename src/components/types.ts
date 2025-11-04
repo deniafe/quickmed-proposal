@@ -10,9 +10,10 @@ export interface Package {
 export interface Feature {
   name: string;
   desc: string;
-  mvp: boolean;
-  standard: boolean;
-  enterprise: boolean;
+  mvp?: boolean;
+  standard?: boolean;
+  enterprise?: boolean;
+  included?: boolean;
 }
 
 export interface FeatureSection {

@@ -47,14 +47,40 @@ export const packages = {
     timeline: "5-6 months",
     description: "Full-featured platform with competitive advantages",
     bestFor: "Serious market entry with competitive features",
-    recommended: true,
   },
   enterprise: {
     name: "Enterprise Package",
     price: "₦28,000,000",
-    timeline: "7-9 months",
+    timeline: "5-6 months",
     description: "Advanced AI, compliance, and scale-ready infrastructure",
     bestFor: "Nationwide scale with investor backing",
+  },
+};
+
+export const subscriptionPlans = {
+  mvp: {
+    name: "MVP Subscription",
+    price: "₦5,000,000",
+    duration: "3 months",
+    description: "Essential pharmacy management features",
+    bestFor: "Small to medium pharmacies starting digitization",
+    features: "mvp",
+  },
+  standard: {
+    name: "Standard Subscription",
+    price: "₦7,000,000",
+    duration: "6 months",
+    description: "Advanced features with analytics and integrations",
+    bestFor: "Growing pharmacies with multiple locations",
+    features: "standard",
+  },
+  enterprise: {
+    name: "Enterprise Subscription",
+    price: "₦10,000,000",
+    duration: "12 months",
+    description: "Full enterprise features with AI and compliance",
+    bestFor: "Large pharmacy chains and enterprise clients",
+    features: "enterprise",
   },
 };
 
@@ -71,37 +97,27 @@ export const appFeatures = {
           {
             name: "Intelligent Drug Search",
             desc: "Search by drug name, brand, ailment, or symptoms",
-            mvp: true,
-            standard: true,
-            enterprise: true,
+            included: true,
           },
           {
             name: "Auto-suggest & Autocomplete",
             desc: "Real-time suggestions as you type",
-            mvp: true,
-            standard: true,
-            enterprise: true,
+            included: true,
           },
           {
             name: "Advanced Filters",
             desc: "Filter by price, distance, delivery speed, ratings, prescription required",
-            mvp: false,
-            standard: true,
-            enterprise: true,
+            included: true,
           },
           {
             name: "AI Drug Recommendations",
             desc: "Suggests alternatives and generics when brand unavailable",
-            mvp: false,
-            standard: true,
-            enterprise: true,
+            included: true,
           },
           {
             name: "Voice Search",
             desc: "Search medications using voice commands",
-            mvp: false,
-            standard: false,
-            enterprise: true,
+            included: true,
           },
         ],
       },
@@ -219,13 +235,7 @@ export const appFeatures = {
             standard: true,
             enterprise: true,
           },
-          {
-            name: "Pay on Delivery",
-            desc: "Cash or POS payment upon delivery",
-            mvp: true,
-            standard: true,
-            enterprise: true,
-          },
+
           {
             name: "QuickMed Wallet",
             desc: "In-app wallet with auto-refill option",
@@ -2201,7 +2211,7 @@ export const paymentStructure = {
     {
       phase: "Beta Testing & Final Delivery",
       amount: "₦2,800,000",
-      percent: "15%",
+      percent: "10%",
       milestone: "Client testing complete & feedback implemented",
     },
   ],

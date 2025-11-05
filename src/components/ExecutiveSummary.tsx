@@ -1,4 +1,5 @@
-import { FileText, Smartphone, Users, Shield } from "lucide-react";
+import { FileText, Smartphone, Users, Shield, ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export default function ExecutiveSummary() {
   return (
@@ -36,6 +37,37 @@ export default function ExecutiveSummary() {
           <p className="text-sm text-gray-600">
             NAFDAC-ready & regulatory support
           </p>
+        </div>
+      </div>
+
+      {/* PRD Call-to-Action */}
+      <div className="mt-6 p-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border border-blue-200">
+        <div className="flex items-center justify-between">
+          <div>
+            <h3 className="text-lg font-semibold text-gray-800 mb-2">
+              📋 Detailed Product Requirements Document
+            </h3>
+            <p className="text-gray-600 mb-3">
+              Explore comprehensive technical specifications, user personas,
+              feature breakdowns, and success metrics for the QuickMed platform.
+            </p>
+            <ul className="text-sm text-gray-600 space-y-1">
+              <li>• Complete feature specifications for all apps</li>
+              <li>• Technical architecture and requirements</li>
+              <li>• User personas and success metrics</li>
+              <li>• AI/ML capabilities and integrations</li>
+            </ul>
+          </div>
+          <div className="ml-6">
+            <Link
+              href="/prd"
+              className="inline-flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors shadow-lg"
+            >
+              <FileText className="w-5 h-5" />
+              <span>View PRD</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
         </div>
       </div>
     </div>

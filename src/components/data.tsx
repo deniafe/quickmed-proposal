@@ -670,6 +670,13 @@ export const appFeatures = {
             enterprise: true,
           },
           {
+            name: "Electronic Invoice Generation",
+            desc: "Generate electronic invoices for customer drug purchases",
+            mvp: false,
+            standard: true,
+            enterprise: true,
+          },
+          {
             name: "Bulk Order Processing",
             desc: "Process multiple orders simultaneously",
             mvp: false,

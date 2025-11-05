@@ -14,5 +14,6 @@ export { default as InvestmentComparison } from "./InvestmentComparison";
 export { default as ROICalculator } from "./ROICalculator";
 export { default as CallToAction } from "./CallToAction";
 export { default as QuickMedProposal } from "./QuickMedProposal";
+export { default as ProductRequirementsDocument } from "./ProductRequirementsDocument";
 export * from "./types";
 export * from "./data";

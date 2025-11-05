@@ -1,7 +1,8 @@
 "use client";
 
-import { Package } from "lucide-react";
+import { Package, FileText } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useState, useEffect } from "react";
 
 export default function Header() {
@@ -26,34 +27,48 @@ export default function Header() {
       <div className="max-w-7xl mx-auto">
         {/* Full header when not scrolled */}
         {!isScrolled && (
-          <div>
-            <div className="flex items-center gap-3 mb-4">
-              {/* QuickMed Logo - fallback to icon if logo not found */}
-              <div className="w-16 h-16 relative">
-                <Image
-                  src="/quickmed-logo.png"
-                  alt="QuickMed Logo"
-                  width={64}
-                  height={64}
-                  className="object-contain"
-                  onError={(e) => {
-                    // Fallback to Package icon if logo not found
-                    e.currentTarget.style.display = "none";
-                    e.currentTarget.nextElementSibling?.classList.remove(
-                      "hidden"
-                    );
-                  }}
-                />
-                <Package className="w-16 h-16 hidden" />
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                {/* QuickMed Logo - fallback to icon if logo not found */}
+                <div className="w-16 h-16 relative">
+                  <Image
+                    src="/quickmed-logo.png"
+                    alt="QuickMed Logo"
+                    width={64}
+                    height={64}
+                    className="object-contain"
+                    onError={(e) => {
+                      // Fallback to Package icon if logo not found
+                      e.currentTarget.style.display = "none";
+                      e.currentTarget.nextElementSibling?.classList.remove(
+                        "hidden"
+                      );
+                    }}
+                  />
+                  <Package className="w-16 h-16 hidden" />
+                </div>
+                <h1 className="text-4xl font-bold">QuickMed</h1>
               </div>
-              <h1 className="text-4xl font-bold">QuickMed</h1>
+              <p className="text-xl text-blue-100">
+                Enterprise Pharmacy Delivery Ecosystem
+              </p>
+              <p className="text-blue-100 mt-2">
+                Professional Development Proposal
+              </p>
             </div>
-            <p className="text-xl text-blue-100">
-              Enterprise Pharmacy Delivery Ecosystem
-            </p>
-            <p className="text-blue-100 mt-2">
-              Professional Development Proposal
-            </p>
+            <div className="flex flex-col items-end gap-3">
+              <Link
+                href="/prd"
+                className="flex items-center space-x-2 bg-white text-blue-600 hover:bg-blue-50 px-6 py-3 rounded-lg font-semibold transition-colors shadow-lg"
+              >
+                <FileText className="w-5 h-5" />
+                <span>View Product Requirements</span>
+              </Link>
+              <p className="text-sm text-blue-200">
+                Detailed technical specifications & features
+              </p>
+            </div>
           </div>
         )}
 
@@ -86,10 +101,19 @@ export default function Header() {
                 </p>
               </div>
             </div>
-            <div className="hidden md:block">
-              <p className="text-sm text-blue-100">
-                Professional Development Proposal
-              </p>
+            <div className="flex items-center gap-4">
+              <Link
+                href="/prd"
+                className="flex items-center space-x-2 bg-blue-500 hover:bg-blue-400 px-4 py-2 rounded-lg transition-colors"
+              >
+                <FileText className="w-4 h-4" />
+                <span className="text-sm font-medium">View PRD</span>
+              </Link>
+              <div className="hidden md:block">
+                <p className="text-sm text-blue-100">
+                  Professional Development Proposal
+                </p>
+              </div>
             </div>
           </div>
         )}
